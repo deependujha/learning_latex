@@ -1,0 +1,67 @@
+\section{Experiments}\label{sec:experiments}
+
+\paragraph{Datasets.} We use two made-up benchmarks, \textsc{Toy-10} and \textsc{Toy-1k}.
+
+\paragraph{Hardware.} Training takes \qty{3.5}{\hour} on one GPU with \qty{80}{\giga\byte} of memory.
+
+\paragraph{Results.} \Cref{tab:main} shows the main results.
+\method is best on both benchmarks, and \cref{tab:features} compares capabilities.
+\todo{add error bars from 5 seeds}
+
+\begin{table}[t]
+  \centering
+  \caption{Accuracy (\%) on two benchmarks, mean \pmstd{std} over 3 seeds.
+    Best in \textbf{bold}, second best \underline{underlined}.}
+  \label{tab:main}
+  \small
+  \begin{tabular}{@{}lcccc@{}}
+    \toprule
+    \multirow{2}{*}{Method} & \multicolumn{2}{c}{\textsc{Toy-10}} & \multicolumn{2}{c}{\textsc{Toy-1k}} \\
+    \cmidrule(lr){2-3} \cmidrule(lr){4-5}
+                     & Top-1 & Params & Top-1 & Params \\
+    \midrule
+    MLP              & 88.2\pmstd{0.4}             & 5M  & 61.3\pmstd{0.6}             & 5M  \\
+    Transformer      & \underline{91.0}\pmstd{0.3} & 86M & \underline{70.4}\pmstd{0.5} & 86M \\
+    \rowcolor{blue!6}
+    \method (ours)   & \textbf{92.1}\pmstd{0.2}    & 40M & \textbf{71.5}\pmstd{0.4}    & 40M \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[t]
+  \centering
+  \caption{Feature comparison.}
+  \label{tab:features}
+  \small
+  \begin{tabular}{@{}lccc@{}}
+    \toprule
+    Method      & Reconstruction & Attention & Guarantee \\
+    \midrule
+    MLP         & \xmark & \xmark & \xmark \\
+    Transformer & \xmark & \cmark & \xmark \\
+    \method     & \cmark & \cmark & \cmark \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}[t]
+  \centering
+  \begin{subfigure}[b]{0.48\linewidth}
+    \centering
+    % In a real paper: \includegraphics[width=\linewidth]{loss_curve}
+    \fbox{\parbox[c][2.5cm][c]{0.9\linewidth}{\centering placeholder for\\ \texttt{loss\_curve.pdf}}}
+    \caption{Training loss.}
+    \label{fig:loss}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.48\linewidth}
+    \centering
+    \fbox{\parbox[c][2.5cm][c]{0.9\linewidth}{\centering placeholder for\\ \texttt{accuracy.pdf}}}
+    \caption{Test accuracy.}
+    \label{fig:acc}
+  \end{subfigure}
+  \caption{Training dynamics. \Cref{fig:loss} shows the loss and \cref{fig:acc} the accuracy.}
+  \label{fig:dynamics}
+\end{figure}
+
+\Cref{fig:dynamics} shows training curves.

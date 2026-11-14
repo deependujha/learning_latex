@@ -1,0 +1,45 @@
+% ====================== macros.tex ======================
+% Method name: change it here and it changes everywhere.
+\usepackage{xspace}
+\newcommand{\method}{\textsc{TinyNet}\xspace}
+
+% Number sets, probability, losses
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\loss}{\mathcal{L}}
+
+% Vectors / matrices
+\newcommand{\vx}{\bm{x}}
+\newcommand{\vy}{\bm{y}}
+\newcommand{\vz}{\bm{z}}
+\newcommand{\vtheta}{\bm{\theta}}
+\newcommand{\mW}{\mathbf{W}}
+\newcommand{\tran}{^{\top}}
+
+% Delimiters & operators
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\softmax}{softmax}
+
+% Theorem environments
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{assumption}{Assumption}
+\newtheorem{definition}[theorem]{Definition}
+\crefname{assumption}{Assumption}{Assumptions}
+
+% Table helpers
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+\newcommand{\pmstd}[1]{{\scriptsize$\pm$#1}}
+
+% Collaboration notes; comment out the second line block to hide them
+\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
+\newcommand{\ada}[1]{\textcolor{blue}{[Ada: #1]}}
+% \renewcommand{\todo}[1]{}
+% \renewcommand{\ada}[1]{}

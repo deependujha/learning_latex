@@ -1,0 +1,21 @@
+% TikZ figure, included with \input{figures/architecture}
+\begin{tikzpicture}[
+    node distance=0.9cm,
+    box/.style={draw, rounded corners, minimum width=1.9cm, minimum height=0.8cm,
+                align=center, fill=#1},
+    box/.default=white,
+    arrow/.style={-{Stealth[length=2mm]}, thick},
+  ]
+  \node[box=gray!10]                 (input) {Input\\$\vx$};
+  \node[box=blue!15, right=of input] (enc)   {Encoder};
+  \node[box=orange!20, right=of enc] (lat)   {Latent\\$\vz$};
+  \node[box=blue!15, right=of lat]   (dec)   {Decoder};
+  \node[box=gray!10, right=of dec]   (out)   {Output\\$\hat{\vx}$};
+
+  \draw[arrow] (input) -- (enc);
+  \draw[arrow] (enc)   -- (lat);
+  \draw[arrow] (lat)   -- (dec);
+  \draw[arrow] (dec)   -- (out);
+  \draw[arrow, dashed, red!70!black] (out.south) -- ++(0,-0.7)
+      -| node[pos=0.25, below] {\small reconstruction loss $\loss_{\text{rec}}$} (input.south);
+\end{tikzpicture}

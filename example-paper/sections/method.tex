@@ -1,0 +1,80 @@
+\section{Method}\label{sec:method}
+
+\paragraph{Setup.}
+Let $\D = \{(\vx_i, y_i)\}_{i=1}^{n}$ with $\vx_i \in \R^d$ and $y_i \in \{1, \ldots, K\}$.
+A model $f_{\vtheta} \colon \R^d \to \R^K$ produces logits $\vz = f_{\vtheta}(\vx)$.
+
+% ---- Exercise 1 from Chapter 4: softmax ----
+The predicted class probabilities are given by the softmax
+\begin{equation}
+  \sigma(\vz)_i = \frac{\exp(z_i)}{\sum_{j=1}^{K} \exp(z_j)}, \qquad i = 1, \ldots, K.
+  \label{eq:softmax}
+\end{equation}
+
+% ---- Exercise 2: attention with \softmax as an operator ----
+Our encoder uses scaled dot-product attention~\citep{vaswani2017attention},
+\[
+  \mathrm{Attn}(Q, K, V) = \softmax\!\left( \frac{Q K\tran}{\sqrt{d_k}} \right) V .
+\]
+
+\paragraph{Objective.}
+We minimize cross-entropy plus a reconstruction term weighted by $\lambda \ge 0$:
+\begin{equation}
+  \vtheta^\star = \argmin_{\vtheta} \;
+  \underbrace{-\frac{1}{n}\sum_{i=1}^{n} \log \sigma\bigl(f_{\vtheta}(\vx_i)\bigr)_{y_i}}_{\loss_{\text{CE}}}
+  + \lambda \, \loss_{\text{rec}}(\vtheta).
+  \label{eq:objective}
+\end{equation}
+
+% ---- Exercise 3: align, only the last line numbered ----
+For intuition, for a linear model with squared error,
+\begin{align}
+  \nabla_{\vtheta} \frac{1}{2n}\norm{\mW\vtheta - \vy}^2
+    &= \frac{1}{2n} \nabla_{\vtheta} (\mW\vtheta - \vy)\tran(\mW\vtheta - \vy) \nonumber \\
+    &= \frac{1}{2n} \cdot 2\, \mW\tran (\mW\vtheta - \vy) \nonumber \\
+    &= \frac{1}{n} \mW\tran (\mW\vtheta - \vy). \label{eq:mse-grad}
+\end{align}
+
+A piecewise activation, for completeness:
+\[
+  \mathrm{ReLU}(x) =
+  \begin{cases}
+    x & \text{if } x > 0, \\
+    0 & \text{otherwise.}
+  \end{cases}
+\]
+
+\paragraph{Optimization.} We train with SGD (\cref{alg:sgd}).
+
+\begin{algorithm}[t]
+  \caption{Training \method with mini-batch SGD}
+  \label{alg:sgd}
+  \begin{algorithmic}[1]
+    \Require dataset $\D$, learning rate $\eta$, epochs $T$, weight $\lambda$
+    \Ensure parameters $\vtheta$
+    \State initialize $\vtheta_0$
+    \For{$t = 1$ \textbf{to} $T$}
+      \For{each minibatch $B \subset \D$}
+        \State $g \gets \nabla_{\vtheta} \bigl[\loss_{\text{CE}}(B) + \lambda \loss_{\text{rec}}(B)\bigr]$
+        \State $\vtheta \gets \vtheta - \eta\, g$ \Comment{gradient step}
+      \EndFor
+    \EndFor
+    \State \Return $\vtheta$
+  \end{algorithmic}
+\end{algorithm}
+
+\paragraph{Theory.}
+
+\begin{assumption}[Smoothness]\label{asm:smooth}
+  The objective $\loss$ is $\beta$-smooth and bounded below by $\loss^\star$.
+\end{assumption}
+
+% ---- Exercise 4: restatable theorem; proof (with \qedhere) is in the appendix ----
+\begin{restatable}[Convergence]{theorem}{convthm}\label{thm:conv}
+  Under \cref{asm:smooth}, gradient descent with step size $\eta \le 1/\beta$ satisfies
+  \[
+    \min_{t < T} \norm{\nabla \loss(\vtheta_t)}^2 \le \frac{2\bigl(\loss(\vtheta_0) - \loss^\star\bigr)}{\eta T}.
+  \]
+\end{restatable}
+
+The proof is in \cref{app:proofs}.

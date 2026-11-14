@@ -1,0 +1,27 @@
+\section{Introduction}\label{sec:intro}
+% Tip: one sentence per line makes git diffs readable.
+Deep networks are trained by minimizing an empirical risk~\citep{goodfellow2016deep}.
+\citet{vaswani2017attention} introduced the Transformer, which is now everywhere~\citep{lecun2015deep, vaswani2017attention}.
+In this paper we propose \method, shown in \cref{fig:arch}.
+
+\begin{figure}[t]
+  \centering
+  \input{figures/architecture}
+  \caption{\textbf{Overview of \method.} An encoder maps the input $\vx$ to a latent $\vz$,
+    and a decoder reconstructs $\hat{\vx}$. The dashed arrow is the reconstruction loss.}
+  \label{fig:arch}
+\end{figure}
+
+\paragraph{Contributions.} Our main contributions are:
+\begin{itemize}[leftmargin=*, nosep]
+  \item a simple objective (\cref{sec:method}, \cref{eq:objective});
+  \item a convergence guarantee (\cref{thm:conv});
+  \item experiments showing gains on two benchmarks (\cref{tab:main}).
+\end{itemize}
+
+\begin{tcolorbox}[colback=blue!4, colframe=blue!50!black, title=Key idea]
+  Reconstruct first, then classify. Everything else is detail.
+\end{tcolorbox}
+
+Even chemistry fits: combustion of methane is \ce{CH4 + 2O2 -> CO2 + 2H2O}.
+\ada{Do we really need the chemistry sentence?}

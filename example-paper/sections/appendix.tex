@@ -1,0 +1,33 @@
+\section{Proofs}\label{app:proofs}
+
+We restate \cref{thm:conv} for convenience. It keeps its original number.
+
+\convthm*
+
+\begin{proof}
+  By $\beta$-smoothness and $\eta \le 1/\beta$, each step decreases the objective:
+  $\loss(\vtheta_{t+1}) \le \loss(\vtheta_t) - \frac{\eta}{2}\norm{\nabla\loss(\vtheta_t)}^2$.
+  Summing over $t = 0, \ldots, T-1$ and using $\loss(\vtheta_T) \ge \loss^\star$,
+  \[
+    T \min_{t<T} \norm{\nabla\loss(\vtheta_t)}^2
+    \le \sum_{t=0}^{T-1} \norm{\nabla\loss(\vtheta_t)}^2
+    \le \frac{2\bigl(\loss(\vtheta_0) - \loss^\star\bigr)}{\eta}. \qedhere
+  \]
+\end{proof}
+
+\section{Hyperparameters}\label{app:hparams}
+
+\begin{table}[h]
+  \centering
+  \caption{Hyperparameters.}
+  \label{tab:hparams}
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    Parameter & Value \\
+    \midrule
+    Learning rate $\eta$ & \num{3e-4} \\
+    Weight decay         & \num{1e-2} \\
+    Batch size           & \num{256} \\
+    \bottomrule
+  \end{tabular}
+\end{table}

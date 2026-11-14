@@ -1,0 +1,12 @@
+[book]
+title = "LaTeX for Research Papers"
+authors = ["Deependu"]
+language = "en"
+src = "src"
+
+[output.html]
+default-theme = "light"
+preferred-dark-theme = "navy"
+git-repository-url = "https://github.com/deependujha/learning_latex"
+site-url = "/learning_latex/"
+additional-js = ["theme/hljs-latex.min.js", "theme/highlight-latex.js"]

@@ -1,0 +1,92 @@
+% =====================================================================
+%  Example paper for the LaTeX course.
+%  Build:  latexmk -pdf main.tex      (or upload this folder to Overleaf)
+%  Uses only standard TeX Live packages, so no image files are needed:
+%  the figure is drawn with TikZ.
+% =====================================================================
+\documentclass[11pt]{article}
+
+% ---------- Layout (fine for a standalone doc; NEVER do this with a venue template) ----------
+\usepackage[letterpaper, margin=1in]{geometry}
+
+% ---------- Fonts & encoding ----------
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% ---------- Math ----------
+\usepackage{amsmath, amssymb, amsthm, mathtools, bm}
+
+% ---------- Figures, tables, algorithms ----------
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{siunitx}
+\usepackage[table]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage[version=4]{mhchem}
+\usepackage{pifont}
+
+% ---------- Theorems (needs thmtools for restatable) ----------
+\usepackage{thmtools, thm-restate}
+
+% ---------- Bibliography ----------
+\usepackage[numbers, sort&compress]{natbib}
+
+% ---------- Links (load late) ----------
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue!70!black, citecolor=blue!70!black, urlcolor=magenta!70!black}
+\usepackage[capitalize, noabbrev]{cleveref}
+
+% ---------- Your notation & helpers ----------
+\input{macros}
+
+% ---------------------------------------------------------------------
+\title{\method: A Tiny Example Paper\\for Learning \LaTeX{}}
+\author{
+  Ada Lovelace\thanks{Equal contribution.} \\
+  Analytical Engine Lab\\
+  \texttt{ada@example.org}
+  \and
+  Alan Turing\footnotemark[1] \\
+  Bletchley Institute\\
+  \texttt{alan@example.org}
+}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+  We present \method, a deliberately simple method whose only purpose is to
+  show how common elements of a machine learning paper are written in \LaTeX{}:
+  equations, theorems, figures, tables, algorithms and citations.
+  On a made-up benchmark, \method improves accuracy by \qty{1.1}{\percent}
+  while using \num{40e6} parameters.
+\end{abstract}
+
+\input{sections/intro}
+\input{sections/method}
+\input{sections/experiments}
+
+\section{Conclusion}\label{sec:conclusion}
+We showed how to write a paper in \LaTeX{}. Limitations and the full proof are
+in \cref{app:proofs}.
+
+\section*{Acknowledgments}
+We thank the readers of this course.
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\clearpage
+\appendix
+\input{sections/appendix}
+
+\end{document}
